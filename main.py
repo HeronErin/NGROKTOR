@@ -6,6 +6,8 @@ URLS = os.path.join(GIT, "URLS.json")
 
 NGROK = "~/python/ngrok"
 
+def pushGit():
+	os.system(f"{GIT} ; git commit . -m \"update servers {time.ctime()}\" ; git push")
 
 
 
@@ -18,9 +20,9 @@ if len(sys.argv) == 3:
 	f = open(URLS, "w")
 	f.write(json.dumps(urls_json))
 	f.close()
-	os.system(f"{GIT} ; git commit . -m \"update servers {time.ctime()}\"")
 
 
+	pushGit()
 
 	print(f"Started server on port {sys.argv[2]}. Use CTRL-Z to kill")
 	ngrok_process = ngrok.get_ngrok_process()
@@ -31,5 +33,8 @@ if len(sys.argv) == 3:
 
 		ngrok.kill()
 
+		del urls_json[sys.argv[1]]
+
+		pushGit()
 else:
 	print("ERROR: use 2 arguments, [app name] [tcp port]")
