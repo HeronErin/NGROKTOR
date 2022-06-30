@@ -7,7 +7,7 @@ URLS = os.path.join(GIT, "URLS.json")
 NGROK = "~/python/ngrok"
 
 def pushGit():
-	os.system(f"cd {GIT} ; git commit . -m \"update servers {time.ctime()}\" -q ; git push -q")
+	os.system(f"cd {GIT} ; git commit . -m \"Updated Servers {time.ctime()}\" -q ; git push -q")
 
 
 
