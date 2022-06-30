@@ -14,8 +14,8 @@ def pushGit():
 if len(sys.argv) == 3:
 	urls_json = json.load(open(URLS, "r"))
 	tcp = ngrok.connect(sys.argv[2], "tcp")
-
-	urls_json[sys.argv[1]] = tcp.public_url
+	pub = tcp.public_url.replace("tcp:/", "http:/")
+	urls_json[sys.argv[1]] = pub
 
 	f = open(URLS, "w")
 	f.write(json.dumps(urls_json))
@@ -24,7 +24,7 @@ if len(sys.argv) == 3:
 
 	pushGit()
 
-	print(f"Started server on port {sys.argv[2]}. Use CTRL-C to kill")
+	print(f"Started server on port {sys.argv[2]} on {pub}. Use CTRL-C to kill")
 	ngrok_process = ngrok.get_ngrok_process()
 	try:
 		ngrok_process.proc.wait()
