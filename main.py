@@ -7,7 +7,7 @@ URLS = os.path.join(GIT, "URLS.json")
 NGROK = "~/python/ngrok"
 
 def pushGit():
-	os.system(f"{GIT} ; git commit . -m \"update servers {time.ctime()}\" ; git push")
+	os.system(f"{GIT} ; git commit . -m \"update servers {time.ctime()}\" -q ; git push -q")
 
 
 
@@ -24,7 +24,7 @@ if len(sys.argv) == 3:
 
 	pushGit()
 
-	print(f"Started server on port {sys.argv[2]}. Use CTRL-Z to kill")
+	print(f"Started server on port {sys.argv[2]}. Use CTRL-C to kill")
 	ngrok_process = ngrok.get_ngrok_process()
 	try:
 		ngrok_process.proc.wait()
