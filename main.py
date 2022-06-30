@@ -34,7 +34,9 @@ if len(sys.argv) == 3:
 		ngrok.kill()
 
 		del urls_json[sys.argv[1]]
-
+		f = open(URLS, "w")
+		f.write(json.dumps(urls_json))
+		f.close()
 		pushGit()
 else:
 	print("ERROR: use 2 arguments, [app name] [tcp port]")
