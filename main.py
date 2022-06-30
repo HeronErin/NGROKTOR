@@ -18,7 +18,7 @@ if len(sys.argv) == 3:
 	f = open(URLS, "w")
 	f.write(json.dumps(urls_json))
 	f.close()
-	os.system(f"{GIT} ; ")
+	os.system(f"{GIT} ; git commit . -m \"update servers {time.ctime()}\"")
 
 
 
